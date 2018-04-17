@@ -20,5 +20,9 @@ int main()
 	ft_putstr("-= libft check: OK=-\n");
 	system("test_gnl");
 	return 0;
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> 15dca8053380383b8c65db787bed8b5826368a9b
 }
