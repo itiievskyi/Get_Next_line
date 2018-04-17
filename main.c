@@ -12,17 +12,17 @@
 
 #include "get_next_line.h"
 #include <stdio.h>
+#include <fcntl.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 
-int main()
+int main(int argc, char **argv)
 {
+	if (argc > 1000 || !(argv[0]))
+		return (0);
 	char *line_0;
-	printf("int = %d, line = %s\n", get_next_line(1, &line_0), line_0);
-	ft_putstr("-= libft check: OK=-\n");
-	system("test_gnl");
+	int fd_0;
+	fd_0 = open("test_0", O_RDONLY);
+	printf("\nint = %d, line = %s\n", get_next_line(fd_0, &line_0), line_0);
 	return 0;
-<<<<<<< HEAD
-
-=======
-	
->>>>>>> 15dca8053380383b8c65db787bed8b5826368a9b
 }

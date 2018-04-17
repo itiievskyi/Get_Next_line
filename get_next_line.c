@@ -14,7 +14,20 @@
 
 int		get_next_line(const int fd, char **line)
 {
-	if (fd != -1)
-		*line = "Hello World!";
-	return (1);
+	int		i;
+	char	*temp;
+
+	i = 0;
+	temp = (char*)malloc(sizeof(char) * (BUFF_SIZE + 1));
+	if (fd == -1)
+		return (-1);
+	temp[BUFF_SIZE] = '\0';
+	while ((i = read (fd, temp, BUFF_SIZE)))
+	{
+//		if (*line == NULL)
+			*line = temp;
+//		else
+//			*line = ft_strjoin(*line, temp);
+	}
+	return (i);
 }
