@@ -10,24 +10,42 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include "get_next_line.h"
 
-int		get_next_line(const int fd, char **line)
+static int	read_line(t_gnl_list **list, char **line)
 {
-	int		i;
-	char	*temp;
+	int					i;
+	char				*temp;
 
-	i = 0;
-	temp = (char*)malloc(sizeof(char) * (BUFF_SIZE + 1));
-	if (fd == -1)
+	i = 1;
+	if ((temp = (char*)malloc(sizeof(char) * (BUFF_SIZE + 1))) == NULL)
 		return (-1);
 	temp[BUFF_SIZE] = '\0';
-	while ((i = read (fd, temp, BUFF_SIZE)))
+	while (i > 0 && ft_strchr(temp, '\n') == NULL)
 	{
-//		if (*line == NULL)
-			*line = temp;
-//		else
-//			*line = ft_strjoin(*line, temp);
+		i = read((*list)->fdn, temp, BUFF_SIZE);
+		*line = temp;
+		(*list)->index += i;
 	}
+	(*list)->time++;
 	return (i);
+}
+
+int			get_next_line(const int fd, char **line)
+{
+	static t_gnl_list	*list;
+//	t_gnl_list			*temp;
+
+	if (fd >= 0)
+	{
+		if ((list = (t_gnl_list*)malloc(sizeof(t_gnl_list))) == NULL)
+			return (-1);
+		list->fdn = fd;
+		list->index = 0;
+		list->time = 0;
+		list->next = NULL;
+		return (read_line(&list, line));
+	}
+	return (-1);
 }

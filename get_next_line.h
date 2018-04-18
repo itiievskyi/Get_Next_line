@@ -12,12 +12,19 @@
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-# define BUFF_SIZE 3
+# define BUFF_SIZE 2
 # include <stdlib.h>
 # include <sys/types.h>
 # include <unistd.h>
 # include "libft/libft.h"
 
-int		get_next_line(const int fd, char **line);
+int				get_next_line(const int fd, char **line);
+typedef struct	s_gnl_list
+{
+	int			fdn;
+	size_t				index;
+	size_t				time;
+	struct s_gnl_list	*next;
+}				t_gnl_list;
 
 #endif

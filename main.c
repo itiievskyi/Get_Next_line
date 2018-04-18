@@ -24,5 +24,6 @@ int main(int argc, char **argv)
 	int fd_0;
 	fd_0 = open("test_0", O_RDONLY);
 	printf("\nint = %d, line = %s\n", get_next_line(fd_0, &line_0), line_0);
+//	printf("\nint = %d, line = %s\n", get_next_line(fd_0, &line_0), line_0);
 	return 0;
 }
