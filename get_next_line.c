@@ -13,39 +13,44 @@
 #include <stdio.h>
 #include "get_next_line.h"
 
-static int	read_line(t_gnl_list **list, char **line)
+static t_list	*get_list_elem(t_list **list, const int fd)
 {
-	int					i;
-	char				*temp;
+	t_list	*temp;
 
-	i = 1;
-	if ((temp = (char*)malloc(sizeof(char) * (BUFF_SIZE + 1))) == NULL)
-		return (-1);
-	temp[BUFF_SIZE] = '\0';
-	while (i > 0 && ft_strchr(temp, '\n') == NULL)
+	temp = *list;
+	while (temp)
 	{
-		i = read((*list)->fdn, temp, BUFF_SIZE);
-		*line = temp;
-		(*list)->index += i;
+		if ((int)temp->content_size == fd)
+			return (temp);
+		temp = temp->next;
 	}
-	(*list)->time++;
-	return (i);
+	temp = ft_lstnew("\0", fd);
+	ft_lstadd(list, temp);
+	return (temp);
 }
 
-int			get_next_line(const int fd, char **line)
+int				get_next_line(const int fd, char **line)
 {
-	static t_gnl_list	*list;
-//	t_gnl_list			*temp;
+	static t_list	*list;
+	t_list			*temp;
+	int				i;
+	int				lstr;
+	char			buf[BUFF_SIZE + 1];
 
-	if (fd >= 0)
+	if (fd < 0 || line == NULL || read(fd, buf, 0) < 0 ||
+		!(*line = ft_strnew(1)) || (temp = get_list_elem(&list, fd)) == NULL)
+		return (-1);
+	while ((lstr = read(fd, buf, BUFF_SIZE)) > 0)
 	{
-		if ((list = (t_gnl_list*)malloc(sizeof(t_gnl_list))) == NULL)
+		buf[lstr] = '\0';
+		if (!(temp->content = ft_strjoin(temp->content, buf)))
 			return (-1);
-		list->fdn = fd;
-		list->index = 0;
-		list->time = 0;
-		list->next = NULL;
-		return (read_line(&list, line));
+		if (ft_strchr(buf, '\n'))
+			break ;
 	}
-	return (-1);
+	*line = temp->content;
+	if (lstr < BUFF_SIZE)
+		return (0);
+	i = 0;
+	return (1);
 }
