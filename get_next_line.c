@@ -33,6 +33,7 @@ static t_list	*get_list_elem(t_list **list, const int fd)
 static int		record_lines(char **line, t_list **temp, int i, int length)
 {
 	char	*str;
+
 	while (((char*)((*temp)->content))[i] != '\n'
 		&& ((char*)((*temp)->content))[i] != '\0')
 		i++;
@@ -62,8 +63,8 @@ int				get_next_line(const int fd, char **line)
 	while ((lstr = read(fd, buf, BUFF_SIZE)) > 0)
 	{
 		buf[lstr] = '\0';
-		if(!(str = ft_strjoin(temp->content, buf)))
-			return(-1);
+		if (!(str = ft_strjoin(temp->content, buf)))
+			return (-1);
 		free(temp->content);
 		temp->content = str;
 		if (ft_strchr(buf, '\n'))
