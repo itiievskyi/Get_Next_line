@@ -74,7 +74,7 @@ int				get_next_line(const int fd, char **line)
 	if (lstr < BUFF_SIZE && !(ft_strlen(temp->content)))
 		return (0);
 	lstr = record_lines(line, &temp, 0, ft_strlen(temp->content));
-	if (!(ft_strlen(temp->content)))
+	if (!(ft_strlen(temp->content)) && !(ft_strlen(str)))
 		free(str);
 	return (lstr);
 }
