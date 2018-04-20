@@ -31,9 +31,11 @@ int		main(int argc, char **argv)
 		if (a < 1)
 		{
 			printf("RETURN = %d\n", a);
+			free(line_0);
 			break ;
 		}
 		printf("RETURN = %d\n\"%s\"\n", a, line_0);
+//		free(line_0);
 	}
 	return (0);
 }

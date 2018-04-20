@@ -37,7 +37,8 @@ static int		record_lines(char **line, t_list **temp, int i, int length)
 	while (((char*)((*temp)->content))[i] != '\n'
 		&& ((char*)((*temp)->content))[i] != '\0')
 		i++;
-	*line = ft_strsub((*temp)->content, 0, i);
+	if (!(*line = ft_strsub((*temp)->content, 0, i)))
+		return (-1);
 	if (((char*)((*temp)->content))[i] == '\0')
 	{
 		ft_strclr((*temp)->content);

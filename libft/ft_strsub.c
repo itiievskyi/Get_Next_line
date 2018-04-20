@@ -22,9 +22,9 @@ char	*ft_strsub(char const *s, unsigned int start, size_t len)
 		return (NULL);
 	i = 0;
 	a = start;
-	if ((char*)malloc(sizeof(*sub) * (len + 1)) == NULL)
-		return (NULL);
 	sub = (char*)malloc(sizeof(*sub) * (len + 1));
+	if (sub == NULL)
+		return (NULL);
 	while (i < len)
 		sub[i++] = s[a++];
 	sub[i] = '\0';
