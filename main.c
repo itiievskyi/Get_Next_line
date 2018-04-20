@@ -16,7 +16,31 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
-int		main(int argc, char **argv)
+static void		check1(void)
+{
+	char	*line_0;
+	int		fd_0;
+	int		fd_1;
+	int		fd_2;
+	int		a;
+
+	a = 0;
+	fd_0 = open("test_0", O_RDONLY);
+	fd_1 = open("test_1", O_RDONLY);
+	fd_2 = open("tests/gnl7_1.txt", O_RDONLY);
+	if ((a = get_next_line(fd_0, &line_0)) > -2)
+		printf("RETURN = %d\n\"%s\"\n", a, line_0);
+	a = get_next_line(fd_0, &line_0);
+	if ((a = get_next_line(fd_0, &line_0)) > -2)
+		printf("RETURN = %d\n\"%s\"\n", a, line_0);
+	if ((a = get_next_line(fd_2, &line_0)) > -2)
+		printf("RETURN = %d\n\"%s\"\n", a, line_0);
+	a = get_next_line(fd_1, &line_0);
+	if ((a = get_next_line(fd_1, &line_0)) > -2)
+		printf("RETURN = %d\n\"%s\"\n", a, line_0);
+}
+
+int				main(int argc, char **argv)
 {
 	char	*line_0;
 	int		fd_0;
@@ -25,7 +49,7 @@ int		main(int argc, char **argv)
 	a = 0;
 	if (argc > 1000 || !(argv[0]))
 		return (0);
-	fd_0 = open(argv[1], O_RDONLY);
+	fd_0 = open("tests/gnl10.txt", O_RDONLY);
 	while ((a = get_next_line(fd_0, &line_0)) > -2)
 	{
 		if (a < 1)
@@ -36,5 +60,6 @@ int		main(int argc, char **argv)
 		}
 		printf("RETURN = %d\n\"%s\"\n", a, line_0);
 	}
+	check1();
 	return (0);
 }

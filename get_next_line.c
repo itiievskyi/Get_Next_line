@@ -10,10 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "get_next_line.h"
 
-static t_list	*get_list_elem(t_list **list, const int fd)
+static t_list	*get_el(t_list **list, const int fd)
 {
 	t_list	*temp;
 
@@ -24,7 +23,8 @@ static t_list	*get_list_elem(t_list **list, const int fd)
 			return (temp);
 		temp = temp->next;
 	}
-	temp = ft_lstnew("\0", fd);
+	if (!(temp = ft_lstnew("\0", fd)))
+		return (NULL);
 	ft_lstadd(list, temp);
 	temp = *list;
 	return (temp);
@@ -58,15 +58,15 @@ int				get_next_line(const int fd, char **line)
 	char			buf[BUFF_SIZE + 1];
 	char			*str;
 
-	if (fd < 0 || line == NULL || read(fd, buf, 0) < 0
-		|| (temp = get_list_elem(&list, fd)) == NULL)
+	if (fd < 0 || !line || read(fd, buf, 0) < 0 || !(temp = get_el(&list, fd)))
 		return (-1);
 	while ((lstr = read(fd, buf, BUFF_SIZE)) > 0)
 	{
 		buf[lstr] = '\0';
 		if (!(str = ft_strjoin(temp->content, buf)))
 			return (-1);
-		free(temp->content);
+		if (temp->content)
+			free(temp->content);
 		temp->content = str;
 		if (ft_strchr(buf, '\n'))
 			break ;

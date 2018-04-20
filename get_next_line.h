@@ -12,12 +12,11 @@
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-# define BUFF_SIZE 10999
+# define BUFF_SIZE 9999
 # include <stdlib.h>
 # include <sys/types.h>
 # include <unistd.h>
 # include "libft/libft.h"
-# define MALLCHECK(x) if (!x) return (-1)
 
 int				get_next_line(const int fd, char **line);
 
