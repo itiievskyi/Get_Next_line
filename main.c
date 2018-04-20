@@ -35,7 +35,6 @@ int		main(int argc, char **argv)
 			break ;
 		}
 		printf("RETURN = %d\n\"%s\"\n", a, line_0);
-//		free(line_0);
 	}
 	return (0);
 }
