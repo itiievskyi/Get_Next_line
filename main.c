@@ -38,6 +38,7 @@ static void		check1(void)
 	a = get_next_line(fd_1, &line_0);
 	if ((a = get_next_line(fd_1, &line_0)) > -2)
 		printf("FD = %d\tRETURN = %d\n\"%s\"\n", fd_0, a, line_0);
+	free(line_0);
 }
 
 int				main(int argc, char **argv)
