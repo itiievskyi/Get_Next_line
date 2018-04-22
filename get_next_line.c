@@ -48,6 +48,7 @@ static int		record_lines(char **line, t_list **temp, char *s, int length)
 	}
 	str = ft_strsub((*temp)->content, i + 1, length - i - 1);
 	ft_strclr((*temp)->content);
+//	free((*temp)->content);
 	(*temp)->content = str;
 	if (!(ft_strlen((*temp)->content)))
 		free(s);

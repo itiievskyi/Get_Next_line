@@ -30,12 +30,13 @@ static void		check1(void)
 	fd_2 = open("tests/gnl7_1.txt", O_RDONLY);
 	if ((a = get_next_line(fd_0, &line_0)) > -2)
 		printf("FD = %d\tRETURN = %d\n\"%s\"\n", fd_0, a, line_0);
-	a = get_next_line(fd_0, &line_0);
+	free(line_0);
 	if ((a = get_next_line(fd_0, &line_0)) > -2)
 		printf("FD = %d\tRETURN = %d\n\"%s\"\n", fd_0, a, line_0);
+	free(line_0);
 	if ((a = get_next_line(fd_2, &line_0)) > -2)
 		printf("FD = %d\tRETURN = %d\n\"%s\"\n", fd_2, a, line_0);
-	a = get_next_line(fd_1, &line_0);
+	free(line_0);
 	if ((a = get_next_line(fd_1, &line_0)) > -2)
 		printf("FD = %d\tRETURN = %d\n\"%s\"\n", fd_0, a, line_0);
 	free(line_0);
@@ -62,7 +63,10 @@ int				main(int argc, char **argv)
 		printf("FD = %d\tRETURN = %d\n\"%s\"\n", fd_0, a, line_0);
 	}
 	check1();
+	line_0 = NULL;
 	if ((a = get_next_line(6, &line_0)) > -2)
 		printf("RETURN = %d\n\"%s\"\n", a, line_0);
+	system ("leaks test_gnl");
+	free(line_0);
 	return (0);
 }
