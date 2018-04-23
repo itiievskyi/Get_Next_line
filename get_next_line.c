@@ -63,7 +63,8 @@ int				get_next_line(const int fd, char **line)
 	char			*str;
 
 	str = NULL;
-	if (fd < 0 || !line || read(fd, buf, 0) < 0 || !(temp = get_el(&list, fd)))
+	if (BUFF_SIZE < 1 || fd < 0 || !line || read(fd, buf, 0) < 0 ||
+		!(temp = get_el(&list, fd)))
 		return (-1);
 	while ((lstr = read(fd, buf, BUFF_SIZE)) > 0)
 	{
