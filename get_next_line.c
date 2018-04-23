@@ -30,7 +30,7 @@ static t_list	*get_el(t_list **list, const int fd)
 	return (temp);
 }
 
-static int		record_lines(char **line, t_list **temp, char *s, int length)
+static int		record_lines(char **line, t_list **temp, int length)
 {
 	char	*str;
 	int		i;
@@ -48,10 +48,9 @@ static int		record_lines(char **line, t_list **temp, char *s, int length)
 	}
 	str = ft_strsub((*temp)->content, i + 1, length - i - 1);
 	ft_strclr((*temp)->content);
-//	free((*temp)->content);
+	if ((*temp)->content)
+		free((*temp)->content);
 	(*temp)->content = str;
-	if (!(ft_strlen((*temp)->content)))
-		free(s);
 	return (1);
 }
 
@@ -79,6 +78,6 @@ int				get_next_line(const int fd, char **line)
 	}
 	if (lstr < BUFF_SIZE && !(ft_strlen(temp->content)))
 		return (0);
-	lstr = record_lines(line, &temp, str, ft_strlen(temp->content));
+	lstr = record_lines(line, &temp, ft_strlen(temp->content));
 	return (lstr);
 }
