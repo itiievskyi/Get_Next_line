@@ -69,7 +69,7 @@ int				main(int argc, char **argv)
 			printf("FD = %d\tRETURN = %d\n\"%s\"\n", fda, ret, line_0);
 			free(line_0);
 		}
-		printf("FD = %d\tRETURN = %d\n", fda, a);
+		printf("FD = %d\tRETURN = %d\n", fda, ret);
 		printf("\n############	ARGUMENT FILE	############\n\n");
 	}
 	printf("############	REDIRECTION TEST	############\n\n");
@@ -79,7 +79,7 @@ int				main(int argc, char **argv)
 		printf("FD = %d\tRETURN = %d\n\"%s\"\n", fda, ret, line_0);
 		free(line_0);
 	}
-	printf("FD = %d\tRETURN = %d\n", fda, a);
+	printf("FD = %d\tRETURN = %d\n", fda, ret);
 	printf("\n############	REDIRECTION TEST	############\n\n");
 	fd_0 = open("tests/gnl10.txt", O_RDONLY);
 	while ((a = get_next_line(fd_0, &line_0)) > -2)
