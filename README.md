@@ -1,4 +1,4 @@
-# Get_Next_line
+# Get_Next_line (42 School Project)
 Function that returns a line read from a file descriptor.
 * “Line” is a succession of characters that end with ’\n’ (ascii code 0x0a) or with End Of File (EOF).
 * The first parameter is the file descriptor that will be used to read.
